@@ -1,0 +1,28 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+    <qresource prefix="/">
+        <file>icons/open.png</file>
+        <file>icons/export.png</file>
+        <file>icons/preset.png</file>
+        <file>icons/save_preset.png</file>
+        <file>icons/load_preset.png</file>
+        <file>icons/play.png</file>
+        <file>icons/pause.png</file>
+        <file>icons/prev.png</file>
+        <file>icons/next.png</file>
+        <file>icons/help.png</file>
+        <file>icons/edit.png</file>
+        <file>icons/brush.png</file>
+        <file>icons/eraser.png</file>
+        <file>icons/undo.png</file>
+        <file>icons/redo.png</file>
+        <file>icons/reset.png</file>
+        <file>icons/auto_fix.png</file>
+        <file>icons/save.png</file>
+        <file>icons/cancel.png</file>
+        <file>icons/batch_export.png</file>
+        <file>icons/batch_tag.png</file>
+        <file>icons/batch_note.png</file>
+        <file>icons/batch_import.png</file>
+    </qresource>
+</RCC> 
