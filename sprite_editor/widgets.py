@@ -958,25 +958,18 @@ class MaskEditWidget(QtWidgets.QWidget):
         try:
             qimg = ImageQt.ImageQt(Image.fromarray(overlay_with_effect))
             pixmap = QPixmap.fromImage(qimg)
-            # 缩放和平移
-            if self.zoom_factor != 1.0 or self.pan_offset != QtCore.QPoint(0, 0):
-                transform = QtGui.QTransform()
-                transform.scale(self.zoom_factor, self.zoom_factor)
-                pixmap = pixmap.transformed(transform, Qt.TransformationMode.SmoothTransformation)
-                result_pixmap = QPixmap(self.size())
-                result_pixmap.fill(Qt.GlobalColor.transparent)
-                painter = QPainter(result_pixmap)
-                x = (self.width() - pixmap.width()) / 2 + self.pan_offset.x()
-                y = (self.height() - pixmap.height()) / 2 + self.pan_offset.y()
-                painter.drawPixmap(int(x), int(y), pixmap)
-                painter.end()
-                self._pixmap = result_pixmap
-            else:
-                self._pixmap = pixmap.scaled(
-                    self.size(),
-                    Qt.AspectRatioMode.KeepAspectRatio,
-                    Qt.TransformationMode.SmoothTransformation
-                )
+            # 缩放和平移 - 统一处理方式，不再区分是否有缩放/平移
+            transform = QtGui.QTransform()
+            transform.scale(self.zoom_factor, self.zoom_factor)
+            pixmap = pixmap.transformed(transform, Qt.TransformationMode.SmoothTransformation)
+            result_pixmap = QPixmap(self.size())
+            result_pixmap.fill(Qt.GlobalColor.transparent)
+            painter = QPainter(result_pixmap)
+            x = (self.width() - pixmap.width()) / 2 + self.pan_offset.x()
+            y = (self.height() - pixmap.height()) / 2 + self.pan_offset.y()
+            painter.drawPixmap(int(x), int(y), pixmap)
+            painter.end()
+            self._pixmap = result_pixmap
         except Exception as e:
             logging.exception(f"Error updating pixmap: {e}")
             self.clear()
@@ -1018,25 +1011,18 @@ class MaskEditWidget(QtWidgets.QWidget):
         try:
             qimg = ImageQt.ImageQt(Image.fromarray(viz))
             pixmap = QPixmap.fromImage(qimg)
-            # Apply zoom and pan same as update_pix
-            if self.zoom_factor != 1.0 or self.pan_offset != QtCore.QPoint(0, 0):
-                transform = QtGui.QTransform()
-                transform.scale(self.zoom_factor, self.zoom_factor)
-                pixmap = pixmap.transformed(transform, Qt.TransformationMode.SmoothTransformation)
-                result_pixmap = QPixmap(self.size())
-                result_pixmap.fill(Qt.GlobalColor.transparent)
-                painter = QPainter(result_pixmap)
-                x = (self.width() - pixmap.width()) / 2 + self.pan_offset.x()
-                y = (self.height() - pixmap.height()) / 2 + self.pan_offset.y()
-                painter.drawPixmap(int(x), int(y), pixmap)
-                painter.end()
-                self._pixmap = result_pixmap
-            else:
-                self._pixmap = pixmap.scaled(
-                    self.size(),
-                    Qt.AspectRatioMode.KeepAspectRatio,
-                    Qt.TransformationMode.SmoothTransformation
-                )
+            # 统一处理方式，不再区分是否有缩放/平移
+            transform = QtGui.QTransform()
+            transform.scale(self.zoom_factor, self.zoom_factor)
+            pixmap = pixmap.transformed(transform, Qt.TransformationMode.SmoothTransformation)
+            result_pixmap = QPixmap(self.size())
+            result_pixmap.fill(Qt.GlobalColor.transparent)
+            painter = QPainter(result_pixmap)
+            x = (self.width() - pixmap.width()) / 2 + self.pan_offset.x()
+            y = (self.height() - pixmap.height()) / 2 + self.pan_offset.y()
+            painter.drawPixmap(int(x), int(y), pixmap)
+            painter.end()
+            self._pixmap = result_pixmap
         except Exception as e:
             logging.exception(f"Error updating GrabCut visualization pixmap: {e}")
             self.clear()
@@ -1432,20 +1418,18 @@ class MaskEditWidget(QtWidgets.QWidget):
             logging.debug("Creating QImage from visualization")
             qimg = ImageQt.ImageQt(Image.fromarray(viz))
             pixmap = QPixmap.fromImage(qimg)
-            if self.zoom_factor != 1.0 or self.pan_offset != QtCore.QPoint(0, 0):
-                transform = QtGui.QTransform()
-                transform.scale(self.zoom_factor, self.zoom_factor)
-                pixmap = pixmap.transformed(transform, Qt.TransformationMode.SmoothTransformation)
-                result_pixmap = QPixmap(self.size())
-                result_pixmap.fill(Qt.GlobalColor.transparent)
-                painter = QPainter(result_pixmap)
-                x = (self.width() - pixmap.width()) / 2 + self.pan_offset.x()
-                y = (self.height() - pixmap.height()) / 2 + self.pan_offset.y()
-                painter.drawPixmap(int(x), int(y), pixmap)
-                painter.end()
-                self._pixmap = result_pixmap
-            else:
-                self._pixmap = pixmap.scaled(self.size(), Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation)
+            # 统一处理方式，不再区分是否有缩放/平移
+            transform = QtGui.QTransform()
+            transform.scale(self.zoom_factor, self.zoom_factor)
+            pixmap = pixmap.transformed(transform, Qt.TransformationMode.SmoothTransformation)
+            result_pixmap = QPixmap(self.size())
+            result_pixmap.fill(Qt.GlobalColor.transparent)
+            painter = QPainter(result_pixmap)
+            x = (self.width() - pixmap.width()) / 2 + self.pan_offset.x()
+            y = (self.height() - pixmap.height()) / 2 + self.pan_offset.y()
+            painter.drawPixmap(int(x), int(y), pixmap)
+            painter.end()
+            self._pixmap = result_pixmap
         except Exception as e:
             logging.exception(f"Error updating Watershed visualization pixmap: {e}")
             self.clear()

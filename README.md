@@ -51,7 +51,7 @@ Sprite Editor 是一个用于从 sprite sheet 中提取角色帧并生成透明�
 
 ### 快速开始
 
-1. 运行 `python tools/sprite_editor/main.py` 启动工具
+1. 运行 `python -m tools.sprite_editor.main` 启动工具
 2. 点击"加载图片"按钮加载 sprite sheet
 3. 调整参数获得最佳结果
 4. 在缩略图区域浏览提取的帧
